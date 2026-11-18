@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ground: #000000;
+  --color-surface: #0b0b0b;
+  --color-raised: #101010;
+  --color-ink: #f9f8f9;
+  --color-ink-2: #e5e5e4;
+  --color-muted: #d6d6d5;
+  --color-hair: #1d1d1d;
+  --color-edge: #3b3b3b;
+  --color-btn: #1c1c1c;
+  --color-btn-hover: #262626;
+  --color-btn-label: #fcfcfd;
+  --color-inverse: #efedef;
+  --color-inverse-ink: #040404;
+  --color-mint: #6ee3ad;
+
+  --font-display: var(--font-garamond, "EB Garamond"), "Liberation Serif", Georgia, serif;
+  --font-sans: var(--font-host, "Host Grotesk"), "Liberation Sans", system-ui, sans-serif;
+
+  --radius-surface: 16px;
+  --container-page: 1200px;
+}
+
+@layer base {
+  html {
+    background: var(--color-ground);
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    scroll-padding-top: 88px;
+  }
+  body {
+    @apply bg-ground font-sans text-base leading-relaxed text-ink antialiased;
+  }
+  p,
+  li,
+  blockquote {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: var(--color-inverse);
+    color: var(--color-inverse-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+  html {
+    scrollbar-color: #3b3b3b #000000;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .wrap {
+    @apply mx-auto w-full max-w-[1248px] px-6;
+  }
+  .band {
+    @apply pt-16 pb-12 lg:pt-24 lg:pb-16;
+  }
+  .eyebrow {
+    @apply text-sm text-muted;
+  }
+  .h2 {
+    @apply font-display text-[2.75rem] leading-[1.05] font-medium tracking-[-0.015em] text-balance lg:text-[3.5rem];
+  }
+  /* Superfície elevada: a luz vem de cima, por isso a borda de cima é mais clara. */
+  .raised {
+    background: linear-gradient(180deg, #121212 0%, #0b0b0b 100%);
+    border: 1px solid var(--color-hair);
+    border-top-color: #2c2c2c;
+    border-radius: var(--radius-surface);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.05),
+      0 24px 48px -24px rgb(0 0 0 / 1);
+  }
+  .link-u {
+    @apply underline decoration-edge decoration-1 underline-offset-4 transition-colors hover:decoration-ink;
+  }
+  /* Legendas do filme: só a cena atual aparece */
+  .film-cap {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(16px);
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s ease,
+      visibility 0.5s;
+  }
+  .film-cap[data-on] {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  @media (min-width: 1024px) {
+    .film-cap {
+      transform: translateY(calc(-50% + 16px));
+    }
+    .film-cap[data-on] {
+      transform: translateY(-50%);
+    }
+  }
+  /* No computador, um véu escuro à esquerda deixa a legenda legível */
+  @media (min-width: 1024px) {
+    .film > div::after {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 55%;
+      background: linear-gradient(to right, #000 40%, rgb(0 0 0 / 0));
+      z-index: -1;
+    }
+  }
+  /* No celular, um véu escuro embaixo deixa a legenda legível sobre a animação */
+  @media (max-width: 1023px) {
+    .film > div::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 55vh;
+      background: linear-gradient(to top, #000 45%, rgb(0 0 0 / 0));
+      z-index: -1;
+    }
+  }
+  .faq summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq[open] .faq-icon {
+    transform: rotate(45deg);
+  }
+}

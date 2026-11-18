@@ -31,6 +31,7 @@
     scroll-padding-top: 88px;
   }
   body {
+    overflow-x: clip;
     @apply bg-ground font-sans text-base leading-relaxed text-ink antialiased;
   }
   p,

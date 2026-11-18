@@ -14,7 +14,7 @@ export function Hero() {
   return (
     <section id="topo" className="wrap grid gap-14 pt-14 pb-16 lg:grid-cols-[7fr_5fr] lg:gap-[72px] lg:pt-28 lg:pb-24">
       <div>
-        <h1 className="font-display text-[58px] leading-[1] font-medium tracking-[-0.025em] sm:text-[80px] lg:text-[96px] lg:leading-[.98]">
+        <h1 className="font-display text-[58px] leading-[1] font-medium tracking-[-0.025em] sm:text-[80px] lg:text-[84px] lg:leading-[.98] xl:text-[96px]">
           <span className="block">Crie imagens</span>
           <span className="block">
             e vídeos <br className="sm:hidden" />
@@ -35,10 +35,10 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-x-10 gap-y-9 lg:gap-y-11 lg:pt-3.5">
+      <div className="grid grid-cols-2 gap-x-8 gap-y-9 xl:gap-x-10 lg:gap-y-11 lg:pt-3.5">
         {numeros.map((x) => (
           <div key={x.l}>
-            <p className="font-display text-[56px] leading-none font-medium tracking-[-0.02em] lining-nums lg:text-[80px]">
+            <p className="font-display text-[56px] leading-none font-medium tracking-[-0.02em] whitespace-nowrap lining-nums lg:text-[60px] xl:text-[80px]">
               {x.pre && <span className="mr-1 align-[0.95em] text-[0.42em] tracking-normal">{x.pre}</span>}
               {x.n}
             </p>

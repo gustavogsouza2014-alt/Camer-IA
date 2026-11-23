@@ -291,7 +291,7 @@ footer{border-top:1px solid var(--line);padding:56px max(5vw,16px) 40px}
       <span><b>Camer IA</b>, nome comercial de <span class="js-nome"></span></span>
       <span><span class="js-doc"></span></span>
       <span>E-mail: <span class="js-email"></span> · WhatsApp: +55 61 99138-2566</span>
-      <span><span class="js-end"></span></span>
+      <span>Venda e atendimento apenas on-line.</span>
     </div>
     <div class="legalbar">
       <span>© 2026 Camer IA · Aprender. Imaginar. Transformar.</span>
@@ -309,10 +309,10 @@ footer{border-top:1px solid var(--line);padding:56px max(5vw,16px) 40px}
 {
 /* PREENCHA AQUI os dados do responsável (aparecem no rodapé e nas políticas) */
 const EMPRESA = {
-  nome: "Nome completo do responsável",
-  documento: "CPF ou CNPJ: preencher",
-  email: "contato@seudominio.com.br",
-  endereco: "Cidade/UF: preencher"
+  nome: "Enzo Lima De Souza",
+  documento: "CPF 106.210.411-06",
+  email: "gustavogsouza.2014@gmail.com",
+  endereco: ""
 };
 const preenchido = v => !/preencher|Nome completo|seudominio/.test(v);
 const fmt = v => preenchido(v) ? v : `<span class="fill" title="Preencha este dado">${v}</span>`;
@@ -515,7 +515,7 @@ const E = () => ({n:fmt(EMPRESA.nome), d:fmt(EMPRESA.documento), e:fmt(EMPRESA.e
 const pages = {
   privacidade: () => { const x=E(); return `${back}<h1>Política de privacidade</h1><p class="upd">${upd}</p>
 <p>Esta política explica como a Camer IA trata dados pessoais, de acordo com a Lei Geral de Proteção de Dados (Lei 13.709/2018, LGPD).</p>
-<h2>Quem é o responsável</h2><p>A Camer IA é operada por ${x.n}, ${x.d}, ${x.a}. Contato para assuntos de privacidade: ${x.e} ou WhatsApp +55 61 99138-2566.</p>
+<h2>Quem é o responsável</h2><p>A Camer IA é operada por ${x.n}, ${x.d}, com atendimento apenas on-line. Contato para assuntos de privacidade: ${x.e} ou WhatsApp +55 61 99138-2566.</p>
 <h2>Quais dados tratamos</h2><ul><li><b>Navegação no site:</b> o site não tem formulários, não usa analytics e não usa cookies de rastreamento. A hospedagem (Cloudflare) registra dados técnicos como endereço IP para segurança e funcionamento.</li><li><b>Contato pelo WhatsApp ou Instagram:</b> seu nome, número ou perfil e o conteúdo das mensagens que você enviar.</li><li><b>Compra:</b> feita na Kiwify, que coleta nome, e-mail, CPF e dados de pagamento. A Camer IA recebe da Kiwify apenas o necessário para liberar o acesso e dar suporte (nome, e-mail e status da compra). Não temos acesso aos dados do seu cartão.</li></ul>
 <h2>Para que usamos</h2><ul><li>Liberar o acesso ao curso comprado e dar suporte.</li><li>Responder suas dúvidas.</li><li>Cumprir obrigações legais e fiscais.</li></ul><p>Bases legais (art. 7º da LGPD): execução de contrato, cumprimento de obrigação legal e legítimo interesse para responder contatos. Não vendemos seus dados.</p>
 <h2>Com quem compartilhamos</h2><p>Kiwify (pagamentos e entrega do curso), Meta (WhatsApp e Instagram, quando você nos procura por lá) e Cloudflare (hospedagem). Cada um tem sua própria política de privacidade.</p>

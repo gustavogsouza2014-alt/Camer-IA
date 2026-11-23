@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Camer IA — Cursos</title>
+<meta name="description" content="Camer IA: dois cursos curtos de imagens e vídeos com IA, em texto, por R$ 29,90 cada.">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: calmo, direto, de uma pessoa só; preto e branco com ar.
+   IDEA: um gerador de IA montando a imagem cubo a cubo.
+   PICTURE: o "C" da Camer IA feito de cubos isométricos, alguns verde-menta.
+   COLOUR and TYPE: preto, branco, cinza; verde-menta só nas imagens. EB Garamond + Instrument Sans.
+   LAYOUT: site completo, do menu ao rodapé, com páginas legais por #hash. */
+:root{color-scheme:dark;--bg:#000;--ink:#f4f4f2;--mute:#b4b4b0;--line:#262626;--card:#0e0e0e;--mint:#3ddc97;--mint2:#1f6b4c}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:84px;scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.6 "Instrument Sans",system-ui,sans-serif;overflow-x:clip}
+a{color:inherit}
+h1,h2,h3{font-family:"EB Garamond",Georgia,serif;font-weight:500;line-height:1.05;text-wrap:balance;margin:0}
+h1{font-size:clamp(44px,7vw,84px)}
+h2{font-size:clamp(32px,4.4vw,52px)}
+h3{font-size:24px}
+p{margin:0}
+.wrap{max-width:1240px;margin:0 auto}
+.band{padding:clamp(56px,8vw,112px) max(5vw,16px);border-top:1px solid var(--line)}
+.mute{color:var(--mute)}
+:focus-visible{outline:2px solid var(--mint);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;left:-999px;top:8px;background:#fff;color:#000;padding:10px 14px;border-radius:8px;z-index:99}
+.skip:focus{left:8px}
+
+header{position:sticky;top:0;z-index:20;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px max(5vw,16px);max-width:1340px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:500 24px "EB Garamond",serif}
+.menu{display:flex;gap:28px}
+.menu a{text-decoration:none;color:var(--mute);padding:10px 0}
+.menu a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 22px;border-radius:999px;background:#fff;color:#000;text-decoration:none;font-weight:600;border:0;cursor:pointer;font-size:16px;white-space:nowrap}
+.btn:hover{background:#dcdcd8}
+.btn.ghost{background:#1a1a1a;color:var(--ink);border:1px solid #333}
+.btn.ghost:hover{background:#262626}
+@media(max-width:700px){.menu{display:none}}
+
+#scrolly{position:relative}
+.stage{position:sticky;top:0;height:100vh;height:100svh;margin-bottom:-100vh;margin-bottom:-100svh;z-index:0;pointer-events:none}
+.stage canvas{width:100%;height:100%;display:block}
+.hero{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(24px,4vw,64px);align-items:center;min-height:calc(100svh - 75px);padding:clamp(40px,6vw,88px) max(5vw,16px);max-width:1340px;margin:0 auto}
+.hero p.lead{font-size:19px;color:#d6d6d2;max-width:34em;margin:24px 0 32px}
+.hero h1{text-shadow:0 2px 30px #000}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 20px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+.stats b{display:block;font:500 clamp(40px,5vw,64px)/1 "EB Garamond",serif;white-space:nowrap;margin-bottom:6px}
+.stats span{font-size:14px;color:var(--mute)}
+.secure{display:flex;align-items:center;gap:8px;margin-top:18px;font-size:14px;color:var(--mute)}
+@media(max-width:860px){.hero{grid-template-columns:1fr;min-height:0}}
+
+#story{position:relative;z-index:1;height:340vh}
+#story .sticky{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center;padding:0 max(5vw,16px);max-width:1340px;margin:0 auto}
+.story-text{width:min(480px,44vw)}
+.count{color:var(--mute);font-size:15px;margin-bottom:14px;font-variant-numeric:tabular-nums}
+.bars{display:flex;gap:6px;width:150px;margin-bottom:26px}
+.bars i{flex:1;height:2px;background:#2a2a2a;position:relative;overflow:hidden;border-radius:2px}
+.bars i::after{content:"";position:absolute;inset:0;background:var(--mint);transform-origin:left;transform:scaleX(var(--p,0))}
+.panes{display:grid}
+.pane{grid-area:1/1;opacity:0;transform:translateY(28px);visibility:hidden;transition:opacity .55s,transform .55s,visibility .55s}
+.pane.on{opacity:1;transform:none;visibility:visible}
+.pane p,.pane .btn{opacity:0;transform:translateY(16px);transition:opacity .6s .15s,transform .6s .15s}
+.pane .btn{transition-delay:.28s}
+.pane.on p,.pane.on .btn{opacity:1;transform:none}
+.pane h2{font-size:clamp(56px,8vw,100px);margin-bottom:18px;text-shadow:0 2px 30px #000}
+.pane p{font-size:18px;color:#d6d6d2;margin-bottom:24px;max-width:24em}
+@media(max-width:760px){#story .sticky{align-items:flex-start;padding-top:100px}.story-text{width:100%}}
+
+.about{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,5vw,72px);align-items:center}
+.about figure{margin:0;aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:#0b0b0b;border:1px solid var(--line)}
+.about figure svg{width:100%;height:100%;display:block}
+.about .k{font-size:14px;color:var(--mute);margin-bottom:10px}
+.about blockquote{margin:20px 0 28px;font-size:18px;color:#d6d6d2;max-width:36em}
+@media(max-width:760px){.about{grid-template-columns:1fr}.about figure{max-height:360px;aspect-ratio:auto;height:320px}}
+
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:40px}
+.grid4 li{list-style:none;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
+.grid4 h3{font-size:22px;margin:14px 0 8px}
+.grid4 p{color:var(--mute);font-size:15.5px}
+ul.grid4{padding:0}
+@media(max-width:960px){.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.grid4{grid-template-columns:1fr}}
+
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:40px;padding:0}
+.steps li{list-style:none;border-top:2px solid #fff;padding-top:18px}
+.steps h3{margin-bottom:8px}
+.steps p{color:var(--mute)}
+.steps .ctas{margin-top:16px}
+@media(max-width:760px){.steps{grid-template-columns:1fr}}
+
+.courses{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:40px}
+.course{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:clamp(22px,3vw,36px);display:flex;flex-direction:column;gap:16px}
+.course .top{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+.tag{font-size:13px;padding:4px 12px;border-radius:999px;background:#1c1c1c;border:1px solid #333}
+.price{font:500 48px/1 "EB Garamond",serif;white-space:nowrap}
+.course ul{margin:0;padding:0;display:grid;gap:10px}
+.course li{list-style:none;display:flex;gap:10px;align-items:flex-start;color:#d6d6d2}
+.course li svg{flex:none;margin-top:4px}
+.course .btn{margin-top:auto;justify-content:center}
+.fine{font-size:13.5px;color:var(--mute)}
+@media(max-width:760px){.courses{grid-template-columns:1fr}}
+
+.faq{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,5vw,72px)}
+details{border-bottom:1px solid var(--line)}
+details:first-child{border-top:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:20px 0;font-weight:500;font-size:18px;min-height:44px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:24px;color:var(--mute);transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding:0 0 22px;color:#d6d6d2;max-width:40em}
+@media(max-width:760px){.faq{grid-template-columns:1fr}}
+
+footer{border-top:1px solid var(--line);padding:56px max(5vw,16px) 40px}
+.fcols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+.fcols h2{font:500 14px "Instrument Sans",sans-serif;color:var(--mute);margin-bottom:12px}
+.fcols ul{margin:0;padding:0;display:grid;gap:6px}
+.fcols li{list-style:none}
+.fcols a{text-decoration:none;display:inline-block;padding:4px 0}
+.fcols a:hover{text-decoration:underline}
+.company{margin-top:40px;padding:20px;border:1px solid var(--line);border-radius:14px;font-size:14.5px;color:#d6d6d2;display:grid;gap:4px}
+.fill{border-bottom:1px dashed var(--mint);color:#fff}
+.legalbar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:24px;font-size:14px;color:var(--mute)}
+@media(max-width:860px){.fcols{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.doc{max-width:760px;margin:0 auto;padding:clamp(40px,6vw,80px) max(5vw,16px) 80px}
+.doc .back{display:inline-flex;align-items:center;gap:6px;color:var(--mute);text-decoration:none;min-height:44px;margin-bottom:16px}
+.doc h1{font-size:clamp(38px,5vw,56px);margin-bottom:12px}
+.doc h2{font-size:28px;margin:40px 0 12px}
+.doc p,.doc li{color:#d6d6d2;margin-bottom:12px}
+.doc ul{padding-left:20px}
+.doc .upd{color:var(--mute);font-size:14px;margin-bottom:28px}
+.doc .note{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;font-size:15px}
+
+.cookie{position:fixed;left:16px;right:16px;bottom:16px;z-index:50;max-width:560px;margin-left:auto;background:#111;border:1px solid #333;border-radius:16px;padding:18px 20px;display:none;gap:14px;box-shadow:0 20px 50px rgba(0,0,0,.6)}
+.cookie.show{display:grid}
+.cookie p{font-size:15px;color:#d6d6d2}
+.cookie .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.cookie a{color:var(--ink);padding:10px 4px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<header>
+  <div class="nav">
+    <a class="brand" href="#topo" aria-label="Camer IA, voltar ao início">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="2" width="3" height="3" fill="#fff"/><rect x="7" y="1" width="2" height="2" fill="#fff"/><rect x="1" y="7" width="2" height="2" fill="#fff"/><path d="M26 10a10 10 0 1 0 0 12" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/><path d="M14 12.5v7l6-3.5z" fill="#fff"/></svg>
+      Camer IA
+    </a>
+    <nav class="menu" aria-label="Principal">
+      <a href="#sobre">Sobre</a><a href="#perguntas">Perguntas</a><a href="#contato">Contato</a>
+    </nav>
+    <a class="btn ghost" href="#cursos">Ver cursos</a>
+  </div>
+</header>
+
+<main id="conteudo">
+<div id="home">
+ <div id="scrolly">
+  <div class="stage" aria-hidden="true"><canvas id="cv"></canvas></div>
+  <section class="hero" id="topo" aria-labelledby="t-hero">
+    <div>
+      <h1 id="t-hero">Crie imagens e vídeos com IA</h1>
+      <p class="lead">Dois cursos curtos e práticos que levam você do primeiro prompt a um resultado pronto para postar. Aprender. Imaginar. Transformar.</p>
+      <div class="ctas">
+        <a class="btn" href="#cursos">Ver os cursos <span aria-hidden="true">→</span></a>
+        <a class="btn ghost" href="#como-funciona">Como funciona</a>
+      </div>
+    </div>
+    <div>
+      <div class="stats">
+        <div><b>2</b><span>cursos: imagens e vídeos</span></div>
+        <div><b>24</b><span>aulas em texto no total</span></div>
+        <div><b>12</b><span>aulas por curso, num só módulo</span></div>
+        <div><b>R$ 29,90</b><span>por curso</span></div>
+      </div>
+      <p class="secure"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.5 9.5 8 11 4.5-1.5 8-6 8-11V5z" fill="none" stroke="currentColor" stroke-width="2"/><path d="m8.5 12 2.5 2.5 4.5-5" fill="none" stroke="currentColor" stroke-width="2"/></svg>Pagamento seguro pela Kiwify</p>
+    </div>
+  </section>
+
+  <section id="story" aria-label="Aprender, imaginar, transformar">
+    <div class="sticky">
+      <div class="story-text">
+        <p class="count"><span id="cnum">01</span> / 03</p>
+        <div class="bars" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="panes">
+          <div class="pane on"><h2>Aprender.</h2><p>Cada aula em texto é uma peça. Você lê no seu ritmo e entende, passo a passo, como a IA pensa.</p></div>
+          <div class="pane"><h2>Imaginar.</h2><p>As peças se juntam. Do prompt certo nasce a imagem que estava só na sua cabeça.</p></div>
+          <div class="pane"><h2>Transformar.</h2><p>E a imagem ganha movimento. Do zero ao vídeo pronto para postar.</p><a class="btn ghost" href="#cursos">Ver os cursos <span aria-hidden="true">→</span></a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+ </div>
+
+  <section class="band" id="sobre" aria-labelledby="t-sobre">
+    <div class="wrap about">
+      <figure>
+        <svg viewBox="0 0 400 500" role="img" aria-label="Ilustração: uma mesa de criação com um monitor mostrando uma imagem gerada por IA e uma janela de vídeo ao lado">
+          <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3ddc97"/><stop offset="1" stop-color="#14402e"/></linearGradient></defs>
+          <rect width="400" height="500" fill="#0b0b0b"/>
+          <rect x="60" y="110" width="280" height="190" rx="14" fill="#161616" stroke="#2c2c2c"/>
+          <rect x="76" y="126" width="248" height="158" rx="8" fill="url(#g1)" opacity=".85"/>
+          <circle cx="270" cy="170" r="22" fill="#e9fff4" opacity=".9"/>
+          <path d="M76 284 150 200l50 50 40-34 84 68z" fill="#0b2a1e"/>
+          <rect x="185" y="300" width="30" height="50" fill="#1d1d1d"/>
+          <rect x="130" y="348" width="140" height="12" rx="6" fill="#262626"/>
+          <rect x="250" y="64" width="110" height="70" rx="10" fill="#111" stroke="#3ddc97"/>
+          <path d="M296 86v26l22-13z" fill="#3ddc97"/>
+          <rect x="30" y="390" width="340" height="8" rx="4" fill="#1c1c1c"/>
+          <g fill="#2a2a2a"><rect x="40" y="420" width="90" height="10" rx="5"/><rect x="40" y="440" width="150" height="10" rx="5"/><rect x="40" y="460" width="120" height="10" rx="5"/></g>
+        </svg>
+      </figure>
+      <div>
+        <p class="k">Quem ensina</p>
+        <h2 id="t-sobre">Criador da Camer IA</h2>
+        <p class="mute" style="margin-top:10px">Professor e criador de imagens e vídeos com IA</p>
+        <blockquote>A Camer IA é um projeto de uma pessoa só. Eu escrevo cada aula, passo a passo, e sou eu quem responde as suas mensagens. A ideia é simples: mostrar o caminho mais curto entre uma ideia na cabeça e uma imagem ou um vídeo pronto, sem enrolação e por um preço que cabe no bolso.</blockquote>
+        <div class="ctas">
+          <a class="btn" href="https://wa.me/5561991382566">Falar comigo no WhatsApp</a>
+          <a class="btn ghost" href="https://instagram.com/cameriaofc">Instagram @cameriaofc</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="t-why">
+    <div class="wrap">
+      <h2 id="t-why">Por que aprender com a Camer IA</h2>
+      <ul class="grid4" id="why"></ul>
+    </div>
+  </section>
+
+  <section class="band" id="como-funciona" aria-labelledby="t-how">
+    <div class="wrap">
+      <h2 id="t-how">Como funciona</h2>
+      <p class="mute" style="margin-top:12px">Três passos entre você e a sua primeira criação com IA.</p>
+      <ol class="steps">
+        <li><h3>Escolha o curso</h3><p>Imagens com IA, Vídeos com IA ou os dois. Cada um tem sua página de compra.</p>
+          <div class="ctas"><a class="btn ghost" href="https://pay.kiwify.com.br/eSQhGfa">Comprar Imagens com IA</a><a class="btn ghost" href="https://pay.kiwify.com.br/EePQS8N">Comprar Vídeos com IA</a></div></li>
+        <li><h3>Pague pela Kiwify</h3><p>O pagamento é feito em ambiente seguro da Kiwify e o acesso chega no seu e-mail.</p></li>
+        <li><h3>Leia e crie</h3><p>Leia as 12 aulas na ordem e saia de cada uma com algo pronto para mostrar.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band" id="cursos" aria-labelledby="t-cursos">
+    <div class="wrap">
+      <h2 id="t-cursos">Dois cursos, o mesmo preço</h2>
+      <p class="mute" style="margin-top:12px">Comece pelo que você mais quer criar. Dá para fazer os dois.</p>
+      <div class="courses" id="courseList"></div>
+      <p class="fine" style="margin-top:18px">Ao comprar, você concorda com os <a href="#termos">Termos de uso</a> e a <a href="#reembolso">Política de reembolso</a>. Os dados de pagamento são tratados pela Kiwify.</p>
+    </div>
+  </section>
+
+  <section class="band" id="perguntas" aria-labelledby="t-faq">
+    <div class="wrap faq">
+      <div>
+        <h2 id="t-faq">Perguntas frequentes</h2>
+        <p class="mute" style="margin:14px 0 18px">Não achou sua resposta?</p>
+        <a class="btn ghost" href="https://wa.me/5561991382566">Pergunte no WhatsApp <span aria-hidden="true">→</span></a>
+      </div>
+      <div id="faqList"></div>
+    </div>
+  </section>
+</div>
+
+<article class="doc" id="legal" hidden aria-live="polite"></article>
+</main>
+
+<footer id="contato">
+  <div class="wrap">
+    <div class="fcols">
+      <div><h2>Cursos</h2><ul><li><a href="https://pay.kiwify.com.br/eSQhGfa">Imagens com IA</a></li><li><a href="https://pay.kiwify.com.br/EePQS8N">Vídeos com IA</a></li><li><a href="#cursos">Preços</a></li></ul></div>
+      <div><h2>Camer IA</h2><ul><li><a href="#sobre">Sobre</a></li><li><a href="#como-funciona">Como funciona</a></li><li><a href="#perguntas">Perguntas</a></li></ul></div>
+      <div><h2>Contato</h2><ul><li><a href="https://wa.me/5561991382566">WhatsApp +55 61 99138-2566</a></li><li><a href="https://instagram.com/cameriaofc">Instagram @cameriaofc</a></li><li><span class="js-email"></span></li></ul></div>
+      <div><h2>Legal</h2><ul><li><a href="#privacidade">Política de privacidade</a></li><li><a href="#termos">Termos de uso</a></li><li><a href="#cookies">Política de cookies</a></li><li><a href="#reembolso">Política de reembolso</a></li></ul></div>
+    </div>
+    <div class="company" aria-label="Dados da empresa">
+      <span><b>Camer IA</b>, nome comercial de <span class="js-nome"></span></span>
+      <span><span class="js-doc"></span></span>
+      <span>E-mail: <span class="js-email"></span> · WhatsApp: +55 61 99138-2566</span>
+      <span><span class="js-end"></span></span>
+    </div>
+    <div class="legalbar">
+      <span>© 2026 Camer IA · Aprender. Imaginar. Transformar.</span>
+      <button class="btn ghost" id="reopenCookie" type="button" style="min-height:40px;font-size:14px">Aviso de cookies</button>
+    </div>
+  </div>
+</footer>
+
+<div class="cookie" id="cookie" role="dialog" aria-live="polite" aria-label="Aviso de cookies">
+  <p>Este site não usa cookies de rastreamento, publicidade ou analytics. Guardamos só uma informação no seu navegador para lembrar que você viu este aviso. Ao clicar em comprar, você vai para a Kiwify, que tem suas próprias regras.</p>
+  <div class="row"><button class="btn" id="okCookie" type="button">Entendi</button><a href="#cookies">Ler a política de cookies</a></div>
+</div>
+
+<script>
+{
+/* PREENCHA AQUI os dados do responsável (aparecem no rodapé e nas políticas) */
+const EMPRESA = {
+  nome: "Nome completo do responsável",
+  documento: "CPF ou CNPJ: preencher",
+  email: "contato@seudominio.com.br",
+  endereco: "Cidade/UF: preencher"
+};
+const preenchido = v => !/preencher|Nome completo|seudominio/.test(v);
+const fmt = v => preenchido(v) ? v : `<span class="fill" title="Preencha este dado">${v}</span>`;
+const putAll = () => {
+  document.querySelectorAll('.js-nome').forEach(e => e.innerHTML = fmt(EMPRESA.nome));
+  document.querySelectorAll('.js-doc').forEach(e => e.innerHTML = fmt(EMPRESA.documento));
+  document.querySelectorAll('.js-email').forEach(e => e.innerHTML = fmt(EMPRESA.email));
+  document.querySelectorAll('.js-end').forEach(e => e.innerHTML = fmt(EMPRESA.endereco));
+};
+
+const ico = '<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="#3ddc97" stroke-width="2.4" stroke-linecap="round"/></svg>';
+const why = [
+  ["Direto ao ponto","Um módulo com 12 aulas em texto por curso. Você lê em poucos dias e já começa a criar.","M4 12h14m-5-5 5 5-5 5"],
+  ["Preço que cabe no bolso","R$ 29,90 por curso, pago uma vez pela Kiwify.","M12 3v18M16 7H10a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6H7"],
+  ["Resultado para postar","Cada aula termina com algo pronto: uma imagem, uma cena, um vídeo curto.","M4 5h16v14H4zM9 9v6l5-3z"],
+  ["Leia no seu tempo","Aulas em texto para ler quando e onde quiser, e voltar ao passo a passo sempre que precisar.","M5 4h10l4 4v12H5zM9 12h6M9 16h6"]
+];
+document.getElementById('why').innerHTML = why.map(([t,d,p]) => `<li><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="${p}" fill="none" stroke="#3ddc97" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>${t}</h3><p>${d}</p></li>`).join('');
+
+const feats = ["1 módulo com 12 aulas em texto","Aulas em texto, no seu ritmo","Acesso enviado por e-mail","Pagamento seguro pela Kiwify","7 dias para desistir, com reembolso integral"];
+const courses = [
+  {n:"Vídeos com IA",tag:"Mais procurado",d:"Aprenda a transformar ideias e imagens em vídeos curtos, prontos para as redes.",x:"Do prompt ao vídeo pronto",u:"https://pay.kiwify.com.br/EePQS8N"},
+  {n:"Imagens com IA",tag:"",d:"Aprenda a criar imagens do zero com IA, do primeiro prompt ao resultado final.",x:"Do prompt à imagem pronta",u:"https://pay.kiwify.com.br/eSQhGfa"}
+];
+document.getElementById('courseList').innerHTML = courses.map(c => `<article class="course"><div class="top"><h3>${c.n}</h3>${c.tag?`<span class="tag">${c.tag}</span>`:''}</div><p class="price">R$ 29,90</p><p class="mute">${c.d}</p><ul>${[feats[0],c.x,...feats.slice(1)].map(f=>`<li>${ico}<span>${f}</span></li>`).join('')}</ul><a class="btn" href="${c.u}">Comprar ${c.n} <span aria-hidden="true">→</span></a></article>`).join('');
+
+const faq = [
+  ["Preciso saber alguma coisa de IA antes?","Não. Os cursos foram pensados para quem está começando: você aprende do primeiro prompt até o resultado pronto para postar."],
+  ["Quantas aulas tem cada curso?","Cada curso tem 1 módulo com 12 aulas em texto. São 24 aulas somando os dois."],
+  ["Quanto custa?","R$ 29,90 por curso, em pagamento único pela Kiwify. Não é assinatura."],
+  ["Como recebo o acesso?","Depois que o pagamento é aprovado, a Kiwify envia o acesso para o e-mail que você usou na compra."],
+  ["E se eu não gostar?",'Você tem 7 dias, contados da compra, para desistir e receber o valor integral de volta, como garante o Código de Defesa do Consumidor. Veja como pedir na <a href="#reembolso">Política de reembolso</a>.'],
+  ["Como tiro uma dúvida?","É só mandar mensagem no WhatsApp +55 61 99138-2566. Sou eu mesmo quem responde."]
+];
+document.getElementById('faqList').innerHTML = faq.map(([q,a],i) => `<details${i?'':' open'}><summary>${q}</summary><p>${a}</p></details>`).join('');
+
+/* ===== Animação de cubos guiada pela rolagem ===== */
+const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+const scrolly = document.getElementById('scrolly'), story = document.getElementById('story'), heroEl = document.getElementById('topo');
+const panes = [...document.querySelectorAll('.pane')], cnum = document.getElementById('cnum');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let seed = 7; const rnd = () => (seed = (seed*16807) % 2147483647) / 2147483647;
+const hex = h => [1,3,5].map(i => parseInt(h.slice(i,i+2),16));
+const mix = (a,b,t) => a.map((v,i) => v + (b[i]-v)*t);
+const MINT = hex('#5fe0a8'), MINT2 = hex('#2f9e6f'), WHITE = hex('#f1f3f2');
+
+/* Forma 3: logo C */
+const logo = [];
+for (let gy=-10; gy<=10; gy++) for (let gx=-10; gx<=10; gx++) {
+  const r = Math.hypot(gx,gy), a = Math.atan2(gy,gx);
+  if (r>=5.6 && r<=9.6 && Math.abs(a)>0.62) { logo.push([gx,gy,-.55,WHITE]); logo.push([gx,gy,.55,mix(WHITE,[150,150,150],.25)]); }
+}
+for (let gx=-2; gx<=3; gx++) for (let gy=-3; gy<=3; gy++) if (Math.abs(gy) <= (3-gx)*0.7) logo.push([gx-0.5,gy,-1.2,MINT]);
+[[-15,9],[-11,12],[-14,4],[-7,14]].forEach(([cx,cy],k) => { for (let i=0;i<2;i++) for (let j=0;j<3;j++) logo.push([cx+i,cy+j,-1,k%2?MINT2:MINT]); });
+
+/* Forma 2: imagem (paisagem com sol) */
+const wall = [], COLS = 22, ROWS = 15;
+for (let r=0; r<ROWS; r++) for (let c=0; c<COLS; c++) {
+  const ground = 8.6 + 1.3*Math.sin(c*0.33+0.6) + (c<5 ? 0.8 : 0);
+  let col;
+  if (r >= ground) col = mix(hex('#0f3a2a'), hex('#174f39'), rnd()*0.6);
+  else if (Math.hypot(c-14, r-4.2) < 2.4) col = mix([330,345,335], [300,330,315], rnd());
+  else col = mix(hex('#bdeedb'), hex('#69cf9f'), Math.min(1, r/ground*0.9 + rnd()*0.12));
+  wall.push([(c-(COLS-1)/2)*1.05, ((ROWS-1)/2-r)*1.05, rnd()*0.25, col]);
+}
+
+/* Forma 1/0: nuvem solta */
+const N = Math.max(logo.length, wall.length);
+const cloud = [];
+for (let i=0; i<N; i++) {
+  const u = rnd()*Math.PI*2, v = Math.acos(2*rnd()-1), rr = Math.cbrt(rnd());
+  const g = rnd() < 0.22;
+  cloud.push([Math.sin(v)*Math.cos(u)*12*rr, Math.cos(v)*8.5*rr, Math.sin(v)*Math.sin(u)*8*rr, g ? mix(MINT, MINT2, rnd()) : mix([70,70,70],[175,175,175],rnd()), 0.55+rnd()*0.5]);
+}
+const order = cloud.map((_,i)=>i).sort((a,b)=>cloud[a][0]-cloud[b][0]);
+const place = list => {
+  const L = [...list].sort((a,b)=>a[0]-b[0]), out = new Array(N).fill(null);
+  L.forEach((cell,j) => { out[order[Math.min(N-1, Math.round(j*N/L.length))]] = cell; });
+  return out;
+};
+const W2 = place(wall), L3 = place(logo);
+const states = [
+  {cells: cloud.map(c => [c[0]*1.35, c[1]*1.1, c[2], c[3].map(v=>v*.45), c[4]]), yaw:.5, pitch:-.32, zoom:1},
+  {cells: cloud.map(c => [c[0], c[1], c[2], c[3], c[4]]), yaw:.75, pitch:-.3, zoom:1},
+  {cells: W2.map((c,i) => c ? [c[0],c[1],c[2],c[3],1] : [cloud[i][0],cloud[i][1],cloud[i][2],cloud[i][3],0]), yaw:-.42, pitch:-.12, zoom:1},
+  {cells: L3.map((c,i) => c ? [c[0],c[1],c[2],c[3],1] : [cloud[i][0],cloud[i][1],cloud[i][2],cloud[i][3],0]), yaw:.38, pitch:-.22, zoom:1.05}
+];
+const delay = cloud.map(() => rnd());
+
+let Wd = 0, Hd = 0, S = 0, Sv = 0, active = -1, running = false, t0 = null, px = 0, py = 0, tpx = 0, tpy = 0, barP = [0,0,0];
+const bars = [...document.querySelectorAll('.bars i')];
+const spin = cloud.map(() => (rnd() - .5) * 5);
+const size = () => { const d = Math.min(2, devicePixelRatio || 1); Wd = cv.clientWidth; Hd = cv.clientHeight; cv.width = Wd*d; cv.height = Hd*d; ctx.setTransform(d,0,0,d,0,0); };
+const ro = new ResizeObserver(() => { size(); draw(performance.now()); }); ro.observe(cv);
+if (matchMedia('(pointer: fine)').matches && !reduce) addEventListener('pointermove', e => { tpx = e.clientX/innerWidth - .5; tpy = e.clientY/innerHeight - .5; }, {passive:true});
+
+const clamp = v => Math.max(0, Math.min(1, v));
+const ease = t => t<.5 ? 4*t*t*t : 1 - (-2*t+2)**3/2;
+const progress = () => {
+  const st = -scrolly.getBoundingClientRect().top, hh = heroEl.offsetHeight;
+  const R = Math.max(1, story.offsetHeight - innerHeight);
+  const q = clamp((st - hh) / R);
+  S = st < hh ? clamp(st/hh) : 1 + ease(clamp((q-.24)/.18)) + ease(clamp((q-.6)/.18));
+  const p = st < hh ? 0 : q < .4 ? 0 : q < .76 ? 1 : 2;
+  barP = st < hh ? [0,0,0] : [clamp(q/.4), clamp((q-.4)/.36), clamp((q-.76)/.24)];
+  bars.forEach((b,i) => b.style.setProperty('--p', barP[i]));
+  if (p !== active) { active = p; panes.forEach((el,i) => el.classList.toggle('on', i===p)); cnum.textContent = '0' + (p+1); }
+};
+
+const draw = t => {
+  if (!Wd) return;
+  if (t0 === null) t0 = t;
+  const intro = reduce ? 1 : clamp((t - t0) / 2200);
+  Sv += (S - Sv) * (reduce ? 1 : .085);
+  px += (tpx - px) * .05; py += (tpy - py) * .05;
+  ctx.clearRect(0,0,Wd,Hd);
+  const a = Math.min(2, Math.floor(Sv)), f = Sv - a, A = states[a], B = states[a+1];
+  const narrow = Wd < 760;
+  const loose = 1 - clamp(Sv - 1);
+  const w2 = clamp(1 - Math.abs(Sv - 2) * 5), w3 = clamp((Sv - 2.8) * 5);
+  const idle = reduce ? 0 : t*0.00025;
+  const yaw = A.yaw + (B.yaw-A.yaw)*ease(f) + Math.sin(idle)*0.12 + loose*idle*0.6 + px*0.45;
+  const pitch = A.pitch + (B.pitch-A.pitch)*ease(f) + py*0.18;
+  const cy0 = narrow ? (Sv < 1 ? .5 : .68) : .52, cx0 = narrow ? .5 : .6 + .08*Math.min(1, Sv);
+  const unit = Math.min(Wd*(narrow ? 1 : .5), Hd) / (narrow ? 34 : 26) * (A.zoom + (B.zoom-A.zoom)*f);
+  const cyw = Math.cos(yaw), syw = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch);
+  const rot = (x,y,z) => { const x1 = x*cyw + z*syw, z1 = -x*syw + z*cyw; return [x1, y*cp - z1*sp, y*sp + z1*cp]; };
+  const AX = [rot(1,0,0), rot(0,1,0), rot(0,0,1)], shade = [.66, 1, .84], F = 46;
+  const ox = Wd*cx0, oy = Hd*cy0;
+
+  /* brilho de fundo */
+  const ga = (.05 + .1*w2 + .12*w3 + .04*(1-loose)) * intro;
+  const g = ctx.createRadialGradient(ox, oy, 0, ox, oy, unit*16);
+  g.addColorStop(0, `rgba(61,220,151,${ga})`); g.addColorStop(1, 'rgba(61,220,151,0)');
+  ctx.fillStyle = g; ctx.fillRect(0,0,Wd,Hd);
+  const fl = ctx.createRadialGradient(ox, oy + unit*12, 0, ox, oy + unit*12, unit*13);
+  fl.addColorStop(0, `rgba(61,220,151,${ga*.9})`); fl.addColorStop(1, 'rgba(61,220,151,0)');
+  ctx.save(); ctx.translate(0, oy + unit*12); ctx.scale(1, .22); ctx.translate(0, -(oy + unit*12)); ctx.fillStyle = fl; ctx.fillRect(0, oy, Wd, unit*26); ctx.restore();
+
+  const scanY = 9 - ((t*0.0045) % 22);
+  const list = [];
+  for (let i=0; i<N; i++) {
+    const p = A.cells[i], q = B.cells[i];
+    const k = ease(clamp(f*1.6 - delay[i]*.6));
+    const m = Math.sin(k*Math.PI);
+    let x = p[0]+(q[0]-p[0])*k, y = p[1]+(q[1]-p[1])*k, z = p[2]+(q[2]-p[2])*k;
+    let s = p[4]+(q[4]-p[4])*k, br = 1;
+    /* voo em arco: os cubos se afastam do centro no meio da troca */
+    const len = Math.hypot(x,y,z) || 1, burst = m * (1.5 + delay[i]*2.5);
+    x += x/len*burst; y += y/len*burst + m*(delay[i]-.4)*3; z += z/len*burst;
+    if (!reduce) {
+      y += Math.sin(t*0.0012 + i) * 0.28 * loose;
+      if (w2) { const d = Math.abs(y - scanY); if (d < 1.6) { const e = 1 - d/1.6; br += .55*e*w2; z -= .9*e*w2; } }
+      if (w3) { const r = Math.hypot(x,y), wv = Math.sin(r*.55 - t*.0035); z += wv*.5*w3; br += Math.max(0,wv)*.22*w3; }
+    }
+    const ik = reduce ? 1 : ease(clamp(intro*1.7 - delay[i]*.7));
+    const spread = 1 + (1-ik)*2.2;
+    s *= ik; if (s < 0.03) continue;
+    const c = rot(x*spread, y*spread, z*spread - (1-ik)*10);
+    const th = reduce ? 0 : m*spin[i] + (1-ik)*spin[i];
+    let ax = AX;
+    if (Math.abs(th) > .01) { const ct = Math.cos(th), st2 = Math.sin(th); ax = [rot(ct,0,-st2), rot(0,1,0), rot(st2,0,ct)]; }
+    list.push([c, mix(p[3], q[3], k), s*0.47, br, ax]);
+  }
+  list.sort((m,n) => n[0][2] - m[0][2]);
+  const proj = (x,y,z) => { const kk = F/(F+z); return [ox + x*kk*unit, oy - y*kk*unit]; };
+  ctx.lineJoin = 'round';
+  for (const [c, col, h, br, ax] of list) {
+    const fog = 1.08 - clamp((c[2]+12)/24)*.45;
+    for (let ai=0; ai<3; ai++) {
+      const n = ax[ai], sg = n[2] < 0 ? 1 : -1;
+      const o1 = ax[(ai+1)%3], o2 = ax[(ai+2)%3];
+      const fc = [c[0]+n[0]*h*sg, c[1]+n[1]*h*sg, c[2]+n[2]*h*sg];
+      ctx.beginPath();
+      [[1,1],[1,-1],[-1,-1],[-1,1]].forEach(([u,v],j) => {
+        const P = proj(fc[0]+(o1[0]*u+o2[0]*v)*h, fc[1]+(o1[1]*u+o2[1]*v)*h, fc[2]+(o1[2]*u+o2[2]*v)*h);
+        j ? ctx.lineTo(P[0],P[1]) : ctx.moveTo(P[0],P[1]);
+      });
+      ctx.closePath();
+      const sh = (ai === 1 && sg < 0 ? .45 : shade[ai]) * fog * br;
+      ctx.fillStyle = `rgb(${Math.min(255,col[0]*sh)|0},${Math.min(255,col[1]*sh)|0},${Math.min(255,col[2]*sh)|0})`;
+      ctx.fill();
+      if (ai === 1 && sg > 0) { ctx.strokeStyle = `rgba(255,255,255,${.16*fog})`; ctx.lineWidth = .7; ctx.stroke(); }
+    }
+  }
+};
+
+const loop = t => { if (!running) return; progress(); draw(t); requestAnimationFrame(loop); };
+const io = new IntersectionObserver(es => {
+  const vis = es[0].isIntersecting && !home.hidden;
+  if (vis && !running) { running = true; requestAnimationFrame(loop); } else if (!vis) running = false;
+});
+io.observe(scrolly);
+if (reduce) addEventListener('scroll', () => { progress(); draw(0); }, {passive:true});
+
+/* Páginas legais */
+const upd = "Última atualização: 22 de novembro de 2026";
+const back = '<a class="back" href="#topo">← Voltar para o site</a>';
+const E = () => ({n:fmt(EMPRESA.nome), d:fmt(EMPRESA.documento), e:fmt(EMPRESA.email), a:fmt(EMPRESA.endereco)});
+const pages = {
+  privacidade: () => { const x=E(); return `${back}<h1>Política de privacidade</h1><p class="upd">${upd}</p>
+<p>Esta política explica como a Camer IA trata dados pessoais, de acordo com a Lei Geral de Proteção de Dados (Lei 13.709/2018, LGPD).</p>
+<h2>Quem é o responsável</h2><p>A Camer IA é operada por ${x.n}, ${x.d}, ${x.a}. Contato para assuntos de privacidade: ${x.e} ou WhatsApp +55 61 99138-2566.</p>
+<h2>Quais dados tratamos</h2><ul><li><b>Navegação no site:</b> o site não tem formulários, não usa analytics e não usa cookies de rastreamento. A hospedagem (Cloudflare) registra dados técnicos como endereço IP para segurança e funcionamento.</li><li><b>Contato pelo WhatsApp ou Instagram:</b> seu nome, número ou perfil e o conteúdo das mensagens que você enviar.</li><li><b>Compra:</b> feita na Kiwify, que coleta nome, e-mail, CPF e dados de pagamento. A Camer IA recebe da Kiwify apenas o necessário para liberar o acesso e dar suporte (nome, e-mail e status da compra). Não temos acesso aos dados do seu cartão.</li></ul>
+<h2>Para que usamos</h2><ul><li>Liberar o acesso ao curso comprado e dar suporte.</li><li>Responder suas dúvidas.</li><li>Cumprir obrigações legais e fiscais.</li></ul><p>Bases legais (art. 7º da LGPD): execução de contrato, cumprimento de obrigação legal e legítimo interesse para responder contatos. Não vendemos seus dados.</p>
+<h2>Com quem compartilhamos</h2><p>Kiwify (pagamentos e entrega do curso), Meta (WhatsApp e Instagram, quando você nos procura por lá) e Cloudflare (hospedagem). Cada um tem sua própria política de privacidade.</p>
+<h2>Por quanto tempo guardamos</h2><p>Pelo tempo necessário para cumprir as finalidades acima e os prazos exigidos por lei, como os fiscais. Depois disso, os dados são apagados.</p>
+<h2>Seus direitos</h2><p>Você pode pedir a qualquer momento (art. 18 da LGPD): confirmação de que tratamos seus dados, acesso, correção, exclusão, portabilidade, informação sobre compartilhamento e revogação de consentimento. Peça por ${x.e} ou pelo WhatsApp. Você também pode reclamar à ANPD (Autoridade Nacional de Proteção de Dados).</p>
+<h2>Mudanças</h2><p>Esta política pode ser atualizada. A data no topo mostra a versão em vigor.</p>`; },
+  termos: () => { const x=E(); return `${back}<h1>Termos de uso</h1><p class="upd">${upd}</p>
+<p>Ao usar este site ou comprar um curso da Camer IA, você concorda com estes termos. A Camer IA é operada por ${x.n}, ${x.d}.</p>
+<h2>O que é vendido</h2><p>Dois cursos digitais em texto: Imagens com IA e Vídeos com IA. Cada um tem 1 módulo com 12 aulas e custa R$ 29,90, em pagamento único pela Kiwify. O acesso é enviado ao e-mail usado na compra.</p>
+<h2>Acesso</h2><p>O acesso é pessoal e intransferível. Não é permitido compartilhar login, revender, copiar ou publicar as aulas, no todo ou em parte.</p>
+<h2>Propriedade intelectual</h2><p>Textos, marca, logotipo e materiais da Camer IA são protegidos pela Lei de Direitos Autorais (Lei 9.610/1998). As imagens e vídeos que você criar com o que aprendeu são seus, respeitadas as regras de cada ferramenta de IA.</p>
+<h2>Uso responsável da IA</h2><p>Você é responsável pelo que cria. Não use as técnicas ensinadas para imitar pessoas reais sem autorização, enganar, violar direitos autorais ou de imagem, ou criar conteúdo ilegal.</p>
+<h2>Ferramentas de terceiros</h2><p>Os cursos ensinam a usar ferramentas de IA de outras empresas. Preços, regras, recursos e disponibilidade delas podem mudar sem aviso e não dependem da Camer IA.</p>
+<h2>Sem promessa de ganhos</h2><p>Os cursos ensinam técnicas. Não há garantia de resultados financeiros, seguidores ou vendas.</p>
+<h2>Reembolso</h2><p>Veja a <a href="#reembolso">Política de reembolso</a>.</p>
+<h2>Lei e foro</h2><p>Estes termos seguem as leis brasileiras, incluindo o Código de Defesa do Consumidor. Fica eleito o foro do domicílio do consumidor.</p>
+<h2>Contato</h2><p>${x.e} ou WhatsApp +55 61 99138-2566.</p>`; },
+  cookies: () => `${back}<h1>Política de cookies</h1><p class="upd">${upd}</p>
+<h2>O que são cookies</h2><p>São pequenos arquivos que um site guarda no seu navegador para lembrar informações.</p>
+<h2>O que este site usa</h2><ul><li><b>Cookies de rastreamento, publicidade ou analytics:</b> nenhum. Não usamos Google Analytics, Meta Pixel nem ferramentas parecidas.</li><li><b>Armazenamento local essencial:</b> uma única informação ("aviso de cookies visto") para não mostrar o aviso de novo. Não identifica você.</li><li><b>Hospedagem:</b> a Cloudflare pode usar cookies técnicos de segurança, necessários para proteger o site.</li></ul>
+<h2>Sites de terceiros</h2><p>Ao clicar em comprar, WhatsApp ou Instagram, você sai deste site. Kiwify e Meta têm suas próprias políticas de cookies.</p>
+<h2>Como apagar</h2><p>Você pode apagar os dados do site nas configurações do seu navegador a qualquer momento.</p>
+<p class="note">Se algum dia o site passar a usar analytics ou pixel de anúncios, esta política será atualizada e o aviso vai pedir sua permissão antes de ativá-los.</p>`,
+  reembolso: () => { const x=E(); return `${back}<h1>Política de reembolso</h1><p class="upd">${upd}</p>
+<h2>Prazo de 7 dias</h2><p>Você pode desistir da compra em até 7 dias corridos, contados da data da compra, sem precisar explicar o motivo. Esse é o direito de arrependimento do art. 49 do Código de Defesa do Consumidor.</p>
+<h2>Valor devolvido</h2><p>O reembolso é integral: os R$ 29,90 pagos voltam para você.</p>
+<h2>Como pedir</h2><ul><li>Pela Kiwify: use o link de reembolso no e-mail de confirmação da compra ou na área do aluno.</li><li>Se tiver dificuldade, fale com a Camer IA por ${x.e} ou WhatsApp +55 61 99138-2566 que eu ajudo a fazer o pedido.</li></ul>
+<h2>Quando o dinheiro volta</h2><p>Depois que o pedido é aprovado, o estorno é feito pela Kiwify no mesmo meio de pagamento. No cartão de crédito, o valor pode aparecer em uma das próximas faturas, conforme o banco emissor. No Pix ou boleto, a devolução é feita em conta.</p>
+<h2>Depois do reembolso</h2><p>O acesso ao curso é cancelado.</p>`; },
+};
+
+const home = document.getElementById('home'), legal = document.getElementById('legal');
+const homeIds = ['topo','sobre','perguntas','contato','cursos','como-funciona','conteudo',''];
+const route = () => {
+  const h = location.hash.slice(1);
+  if (pages[h]) {
+    legal.innerHTML = pages[h](); legal.hidden = false; home.hidden = true; window.scrollTo(0,0);
+    document.title = legal.querySelector('h1').textContent + ' — Camer IA';
+  } else if (homeIds.includes(h) || document.getElementById(h)) {
+    legal.hidden = true; home.hidden = false; document.title = 'Camer IA — Cursos';
+    if (h) { const el = document.getElementById(h); el && el.scrollIntoView(); }
+  } else {
+    legal.innerHTML = `${back}<h1>Página não encontrada</h1><p>O endereço que você abriu não existe. Volte para o início ou veja os cursos.</p><p style="margin-top:20px"><a class="btn" href="#cursos">Ver os cursos</a></p>`;
+    legal.hidden = false; home.hidden = true; document.title = 'Página não encontrada — Camer IA';
+  }
+};
+window.addEventListener('hashchange', route);
+
+const ck = document.getElementById('cookie');
+let seen = false;
+try { seen = localStorage.getItem('camer-cookie') === '1'; } catch(e) {}
+if (!seen) ck.classList.add('show');
+document.getElementById('okCookie').addEventListener('click', () => { ck.classList.remove('show'); try { localStorage.setItem('camer-cookie','1'); } catch(e) {} });
+document.getElementById('reopenCookie').addEventListener('click', () => ck.classList.add('show'));
+
+putAll(); route();
+}
+</script>
+</body>
+</html>

@@ -1,5 +1,17 @@
 # Camer IA — site
 
+**Versão publicada:** a pasta `site/` (HTML puro, sem build). O Cloudflare publica essa pasta (veja `wrangler.jsonc`).
+
+- `site/index.html`: o site inteiro, com a animação de cubos, as páginas legais (#privacidade, #termos, #cookies, #reembolso) e o aviso de cookies.
+- Dados da empresa (nome, CPF/CNPJ, e-mail, cidade): edite o bloco `EMPRESA` no começo do `<script>` em `site/index.html`.
+- `site/404.html`: página de erro em português.
+
+A versão antiga em Next.js (pastas `app/`, `components/`, `lib/`) continua no repositório, mas não é mais a que vai ao ar. Para voltar para ela, troque `./site` por `./out` no `wrangler.jsonc`.
+
+---
+
+# Camer IA — site
+
 Next.js 15 + React 19 + TypeScript + Tailwind CSS 4. Pronto para publicar na Vercel.
 
 ## Rodar no computador
